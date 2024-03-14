@@ -12,7 +12,7 @@ website:
 
 format:
   html:
-    theme: jekyll-theme-lux
+    theme: lux
     css: styles.css
     toc: true
 

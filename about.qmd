@@ -2,11 +2,22 @@
 title: "About"
 ---
 
-About this site
+## Personal information
 
 ```{r}
-1 + 1
 
 ```
 
-# Data Visualization
+![](images/self.jpg){fig-align="left" width="201"}
+
+Name: Liu Meihan
+
+Email address: e1092093\@u.nus.edu
+
+Phone number: 82134070
+
+School: National University of Singapore - CNM major & Film studies minor
+
+## Self-introduction
+
+Hello, My name is Meihan, you can call me Cathy as well. I am currently a year 2 students major in Communications and new media at University of Singapore. I love eating, sleeping and watching movies.

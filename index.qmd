@@ -2,8 +2,8 @@
 title: "Liu Meihan's website"
 ---
 
-```{r}
-
+```{=html}
+<iframe height="400" width="100%" frameborder="no" src="https://liumeihan124.shinyapps.io/Sample_app/"> </iframe>
 ```
 
 Welcome to my website

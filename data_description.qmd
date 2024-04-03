@@ -1,0 +1,49 @@
+---
+title: "Data Set Description"
+---
+
+![](images/tiktok.png){width="554"}
+
+#### *Title*
+
+**"Top 100 TikTok Influencers Metrics for June 2022 to December 2022"**
+
+#### *Description*
+
+This dataset covers a 3-month period from June 2022 to December 2022, providing detailed insights into influencer metrics specifically from the TikTok platform. It offers valuable information on TikTok influencers, focusing on metrics such as subscribers, views, likes, shares, and comments.
+
+#### *Contents*
+
+The dataset examines TikTok influencers based on key performance indicators such as subscribers, views, likes, shares, and comments. It provides a comprehensive view of influencer activity and engagement specifically within the TikTok ecosystem.
+
+#### *Context*
+
+TikTok has emerged as a dominant force in the social media landscape, particularly among younger demographics. Influencers on TikTok have significant reach and influence over their audiences, making them valuable partners for brands seeking to connect with consumers in a dynamic and engaging manner.
+
+Influencers play a significant role in modern marketing strategies, attracting businesses aiming to reach audiences in a more authentic and engaging manner. As consumers increasingly tune out traditional advertisements, businesses turn to influencers to amplify their marketing efforts and connect with target audiences more effectively.
+
+#### *Variables and Data Types*
+
+| Variables         | Descriptions                   | Data Types |
+|-------------------|--------------------------------|------------|
+| Tiktoker          | Name shown on TikTok plateform | character  |
+| Influencer.name   | Name of the actual person      | character  |
+| Subscribers.count | Numbers of followers           | numeric    |
+| Views.avg         | Average number of views        | numeric    |
+| Likes.avg         | Average number of likes        | numeric    |
+| Comments.avg      | Average number of comments     | numeric    |
+| Shares.avg        | Average number of shares       | numeric    |
+
+#### *Key insights*
+
+-   TikTok influencers are evaluated based on multiple metrics, including the number of subscribers, views, likes, shares, and comments on their content. These metrics provide insights into their reach, engagement, and impact within the TikTok community.
+-   Subscribers indicate the size of an influencer's TikTok following, while views and likes reflect the popularity and appeal of their content. Shares demonstrate the virality of an influencer's posts, amplifying brand exposure, while comments gauge audience interaction and sentiment.
+-   Stakeholders can analyze these metrics to identify trends, measure campaign effectiveness, and make data-driven decisions to optimize influencer marketing strategies specifically tailored to TikTok.
+
+#### Licese
+
+CC0: Public Domain
+
+#### References
+
+<https://www.kaggle.com/datasets/ramjasmaurya/top-1000-social-media-channels>

@@ -2,13 +2,18 @@ project:
   type: website
   output-dir: docs
 website:
-  title: "LiuMeihan124.github.io"
+  title: "Liu Meihan NM2207"
   navbar:
     left:
       - href: index.qmd
         text: Home
       - about.qmd
-      - project.qmd
+      - text: "Final Project"     
+        menu: 
+        - data_description.qmd
+        - project.qmd
+      
+      
 
 format:
   html:

@@ -1,0 +1,80 @@
+```{r}
+
+```
+
+---
+title: "clean_data"
+author: "Liu Meihan"
+date: "2024-04-02"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+library(dplyr)
+library(tidyverse)
+```
+
+```{r}
+june_data <- read.csv("/Users/shuil/Desktop/NM2207/project_data/june.csv", stringsAsFactors = FALSE)
+
+replace_k_m <- function(x) {
+  for (i in 1:length(x)) {
+    # 将k替换为*1000
+    x[i] <- gsub("([0-9]+\\.?[0-9]*)k", "\\1*1000", x[i], ignore.case = TRUE, perl = TRUE)
+    # 将m替换为*1000000
+    x[i] <- gsub("([0-9]+\\.?[0-9]*)m", "\\1*1000000", x[i], ignore.case = TRUE, perl = TRUE)
+    # 将字符串计算结果转为数值
+    x[i] <- eval(parse(text = x[i]))
+  }
+  return(x)
+}
+
+cols_to_replace <- c(3:7)
+june_data[, cols_to_replace] <- lapply(june_data[, cols_to_replace], replace_k_m)
+```
+
+```{r}
+# Assuming you want to convert columns 3 through 7 of your dataframe 'june_data' to numeric
+
+June <- june_data %>%
+  mutate_at(vars(3:7), as.numeric)
+```
+
+```{r}
+June <- june_data %>% arrange(desc(Subscribers.count)) %>% slice(1:100)
+```
+
+```{r}
+dec_data <-read.csv("/Users/shuil/Desktop/NM2207/project_data/dec.csv", stringsAsFactors = FALSE)
+
+replace_k_m <- function(x) {
+  for (i in 1:length(x)) {
+    # 将k替换为*1000
+    x[i] <- gsub("([0-9]+\\.?[0-9]*)k", "\\1*1000", x[i], ignore.case = TRUE, perl = TRUE)
+    # 将m替换为*1000000
+    x[i] <- gsub("([0-9]+\\.?[0-9]*)m", "\\1*1000000", x[i], ignore.case = TRUE, perl = TRUE)
+    # 将字符串计算结果转为数值
+    x[i] <- eval(parse(text = x[i]))
+  }
+  return(x)
+}
+
+cols_to_replace <- c(4:8)
+dec_data[, cols_to_replace] <- lapply(dec_data[, cols_to_replace], replace_k_m)
+```
+
+
+```{r}
+December <- dec_data %>%
+  mutate_at(vars(4:8), as.numeric)
+
+December <- December %>% arrange(desc(followers)) %>% slice(1:100)
+
+December <- December[, -1]
+```
+

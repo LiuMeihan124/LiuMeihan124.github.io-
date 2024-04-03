@@ -1,25 +1,12 @@
 ---
-title: "Final Project"
+title: "Data Visualization"
 ---
 
-## Seasonal Trends in TikTok Engagement: compare June and December in 2022
+## June
 
-#### ***Identified dataset:***
-
-```{r}
-summer_data <- read.csv("/Users/shuil/Desktop/NM2207/project_data/june.csv")
-
-winter_data <- read.csv("/Users/shuil/Desktop/NM2207/project_data/dec.csv")
+```{=html}
+<iframe height="400" width="100%" frameborder="no" src="https://liumeihan124.shinyapps.io/Sample_app/"> </iframe>
 ```
+## September
 
-```{r}
-library(tidyverse)
-```
-
-```{r}
-glimpse(summer_data)
-```
-
-```{r}
-glimpse(winter_data)
-```
+## December

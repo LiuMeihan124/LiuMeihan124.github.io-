@@ -1,0 +1,12 @@
+name: sep_app
+title: sep_app
+username: liumeihan124
+account: liumeihan124
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 11689424
+bundleId: 8464422
+url: https://liumeihan124.shinyapps.io/sep_app/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE

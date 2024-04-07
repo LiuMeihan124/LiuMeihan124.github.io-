@@ -12,6 +12,7 @@ website:
         menu: 
         - data_description.qmd
         - project.qmd
+        - story.qmd
       
       
 

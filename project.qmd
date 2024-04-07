@@ -5,8 +5,14 @@ title: "Data Visualization"
 ## June
 
 ```{=html}
-<iframe height="400" width="100%" frameborder="no" src="https://liumeihan124.shinyapps.io/Sample_app/"> </iframe>
+<iframe height="400" width="100%" frameborder="no" src="https://liumeihan124.shinyapps.io/June/"> </iframe>
 ```
 ## September
+```{=html}
+
+```
 
 ## December
+```{=html}
+<iframe height="400" width="100%" frameborder="no" src=" https://liumeihan124.shinyapps.io/dec_app/"> </iframe>
+```

@@ -1,0 +1,13 @@
+name: June
+title: June
+username: liumeihan124
+account: liumeihan124
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 11658122
+bundleId: 8451141
+url: https://liumeihan124.shinyapps.io/June/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: clean_data.Rmd|dec_app.R|june.csv|project_data/dec.csv

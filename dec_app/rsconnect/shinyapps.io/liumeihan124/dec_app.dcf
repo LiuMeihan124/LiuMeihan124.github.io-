@@ -1,0 +1,12 @@
+name: dec_app
+title: dec_app
+username: liumeihan124
+account: liumeihan124
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 11665373
+bundleId: 8463954
+url: https://liumeihan124.shinyapps.io/dec_app/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE

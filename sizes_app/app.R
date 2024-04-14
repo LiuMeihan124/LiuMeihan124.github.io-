@@ -26,15 +26,16 @@ library(dplyr)
 
 # Assuming june_data is your original data frame
 June <- june_data %>%
-  mutate_at(vars(3:7), as.numeric) %>%
-  arrange(desc(Subscribers.count)) %>%  # Arrange by the most subscribers to the least
-  slice(1:100)  # Select the first 100 rows
+  mutate_at(vars(3:7), as.numeric)
 
 June[, c("Subscribers.count", "Views.avg.", "Likes.avg")] <- 
   June[, c("Subscribers.count", "Views.avg.", "Likes.avg")] / 1000000
 
 June[, c("Shares.avg", "Comments.avg.")] <- 
   June[, c("Shares.avg", "Comments.avg.")] / 1000
+
+June <- June %>% 
+  sample_n(1000, replace = FALSE)
 
 
 June <- data.frame(
@@ -69,12 +70,10 @@ sep_data[, cols_to_replace] <- lapply(sep_data[, cols_to_replace], replace_k_m)
 September <- sep_data %>%
   mutate_at(vars(4:8), as.numeric)
 
-September <- September %>% arrange(desc(Subscribers)) %>% slice(1:100)
-
 September <- September[, -1]
 
 September <- data.frame(
-  Influencer = September$Tiktok.name,
+  Influencers = September$Tiktok.name,
   Subscribers = September$Subscribers/1000000,
   Views = September$Views.avg./1000000,
   Likes = September$Likes.avg./1000000,
@@ -103,75 +102,74 @@ dec_data[, cols_to_replace] <- lapply(dec_data[, cols_to_replace], replace_k_m)
 December <- dec_data %>%
   mutate_at(vars(4:8), as.numeric)
 
-December <- December %>% arrange(desc(followers)) %>% slice(1:100)
-
 December <- December[, -1]
 
 December <- data.frame(
-  Influencer = December$Tiktok.name,
+  Influencers = December$Tiktok.name,
   Subscribers = December$followers/1000000,
   Views = December$views.avg./1000000,
   Likes = December$likes.avg../1000000,
   Comments = December$comments.avg../1000,
   Shares = December$shares.avg../1000
 )
-
 # Define UI
 ui <- fluidPage(
-  titlePanel("Top 100 TikTok Influencers"),
+  
+  titlePanel("Influencer Distribution by Subscribers Count"),
+  
   sidebarLayout(
     sidebarPanel(
-      selectInput("month", "Select Month:",
+      selectInput("dataset", "Select Month:",
                   choices = c("June", "September", "December"),
-                  selected = "June"),
-      selectInput("metric", "Engagement Metric:",
-                  choices = c("Subscribers", "Views", "Likes", "Shares", "Comments"),
-                  selected = "Subscribers")
+                  selected = "June")
     ),
+    
     mainPanel(
-      plotlyOutput("barplot")
+      plotOutput("barplot")
     )
   )
 )
-
 # Define server logic
 server <- function(input, output) {
   
-  # Reactive expression to select dataset based on user-selected month
-  selected_month_data <- reactive({
-    switch(input$month,
+  # Reactive expression to select dataset based on user input
+  dataset <- reactive({
+    switch(input$dataset,
            "June" = June,
            "September" = September,
            "December" = December)
   })
   
-  # Function to generate barplot based on selected metric and month
-  generate_barplot <- function() {
-    data <- selected_month_data()
-    month_color <- switch(input$month,
-                          "June" = "skyblue",
-                          "September" = "black",
-                          "December" = "purple")
-    p <- ggplot(data, aes_string(x = "Influencer", y = input$metric)) +
-      geom_bar(stat = "identity", fill = month_color) +  # Use month-specific color
-      labs(title = paste("Top 100 TikTok Influencers in", input$month, "-", input$metric),
-           x = "Influencer (name)", y = NULL) +  # Remove y-axis label here
-      theme_minimal() +
-      theme(axis.text.x = element_text(angle = 45, hjust = 1))
-    
-    # Modify y-axis label to include unit
-    if (input$metric %in% c("Subscribers", "Views", "Likes")) {
-      p <- p + ylab(paste0(input$metric, " (per millions)"))
-    } else if (input$metric %in% c("Shares", "Comments")) {
-      p <- p + ylab(paste0(input$metric, " (per thousand)"))
-    }
-    
-    ggplotly(p)
+  # Function to categorize influencers
+  categorize_influencers <- function(Subscribers) {
+    ifelse(Subscribers > 1, "Mega",
+           ifelse(Subscribers >= 0.1, "Macro",
+                  ifelse(Subscribers >= 0.01, "Micro", "Nano")))
   }
   
-  # Render plotly barplot
-  output$barplot <- renderPlotly({
-    generate_barplot()
+  # Generate barplot based on selected dataset
+  output$barplot <- renderPlot({
+    # Filter data based on selected dataset
+    selected_data <- dataset()
+    
+    # Categorize influencers
+    selected_data$Influencer_Type <- categorize_influencers(selected_data$Subscribers)
+    
+    # Define the order of factor levels in Influencer_Type
+    selected_data$Influencer_Type <- factor(selected_data$Influencer_Type,
+                                            levels = c("Mega", "Macro", "Micro", "Nano"))
+    
+    # Create barplot
+    p <- ggplot(selected_data, aes(x = Influencer_Type, fill = Influencer_Type)) +
+      geom_bar() +
+      labs(title = paste("Influencer Distribution by Subscribers Count -", input$dataset),
+           x = "Influencer Type", y = "Number of Influencers") +
+      theme_minimal()
+    
+    # Add text labels to the bars
+    p <- p + geom_text(stat = 'count', aes(label = ..count..), vjust = -0.5)
+    
+    print(p)
   })
 }
 

@@ -118,7 +118,7 @@ December <- data.frame(
 
 # Define UI
 ui <- fluidPage(
-  titlePanel("Top 100 TikTok Influencers"),
+  titlePanel("Top TikTok Influencers"),
   sidebarLayout(
     sidebarPanel(
       selectInput("month", "Select Month:",
@@ -126,7 +126,10 @@ ui <- fluidPage(
                   selected = "June"),
       selectInput("metric", "Engagement Metric:",
                   choices = c("Subscribers", "Views", "Likes", "Shares", "Comments"),
-                  selected = "Subscribers")
+                  selected = "Subscribers"),
+      selectInput("num_influencers", "Select Number of Influencers:",
+                  choices = c(10, 20, 50),
+                  selected = 10)  # Default to top 10 influencers
     ),
     mainPanel(
       plotlyOutput("barplot")
@@ -145,16 +148,17 @@ server <- function(input, output) {
            "December" = December)
   })
   
-  # Function to generate barplot based on selected metric and month
+  # Function to generate barplot based on selected metric, month, and number of influencers
   generate_barplot <- function() {
     data <- selected_month_data()
+    num_influencers <- input$num_influencers
     month_color <- switch(input$month,
                           "June" = "skyblue",
                           "September" = "black",
                           "December" = "purple")
-    p <- ggplot(data, aes_string(x = "Influencer", y = input$metric)) +
+    p <- ggplot(data[1:num_influencers, ], aes_string(x = "Influencer", y = input$metric)) +
       geom_bar(stat = "identity", fill = month_color) +  # Use month-specific color
-      labs(title = paste("Top 100 TikTok Influencers in", input$month, "-", input$metric),
+      labs(title = paste("Top", num_influencers, "TikTok Influencers in", input$month, "-", input$metric),
            x = "Influencer (name)", y = NULL) +  # Remove y-axis label here
       theme_minimal() +
       theme(axis.text.x = element_text(angle = 45, hjust = 1))

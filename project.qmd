@@ -2,7 +2,7 @@
 title: "Data Overview"
 ---
 
-## Overview with the Top 100 Influencers
+## Overview with the Top Influencers
 
 ```{=html}
 <iframe height="400" width="100%" frameborder="no" src="https://liumeihan124.shinyapps.io/June/"> </iframe>
